@@ -1,6 +1,6 @@
 class HomeController < AuthenticatedController
   def index
-    # @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
+    @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
     ShopifyAPI::Base.site = Shop.find_by_name(params[:shop]).api_url
 
     @orders = ShopifyAPI::Order.find(:all, :params => {:created_at_min => 1.week.ago})
