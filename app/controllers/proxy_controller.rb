@@ -25,7 +25,7 @@ class ProxyController < ApplicationController
 
     # @top_seller_count = top_seller_stats.last
 
-    render :layout => false
+    render :layout => false, :content_type => 'application/liquid'
   end
 
   # private 
