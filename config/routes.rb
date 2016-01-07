@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     get 'logout' => :destroy, :as => :logout
   end
 
+  controller :proxy do
+    get '/proxy' => :index, :as => :proxy
+  end
+
   root :to => 'home#index'
   
   # The priority is based upon order of creation: first created -> highest priority.
