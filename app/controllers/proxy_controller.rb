@@ -1,4 +1,6 @@
 class ProxyController < ApplicationController
+  before_action: verify_request_source
+
   def index
     ShopifyAPI::Base.site = Shop.find_by_name(params[:shop]).api_url
 
@@ -25,4 +27,20 @@ class ProxyController < ApplicationController
 
     render :layout => false, :content_type => 'application/liquid'
   end
+
+  private 
+    def verify_request_source
+      url_parameters = {
+        "shop" => params[:shop],
+        "path_prefix" => params[:path_prefix],
+        "timestamp" => params[:timestamp]
+      }
+
+      sorted_params = url_parameters.collect{ |k, v| "#{k}=#{Array(v).join(',')}" }.sort.join
+
+      calculated_signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha256'),
+      ShopifyAppProxyExample::Application.config.shopify.secret, sorted_params)
+
+      raise 'Invalid signature' if params[:signature] != calculated_signature
+    end
 end
