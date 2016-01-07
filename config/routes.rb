@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   controller :proxy do
-    get '/proxy' => :index, :as => :proxy
+    get 'proxy' => :index, :as => :proxy
   end
 
   root :to => 'home#index'
