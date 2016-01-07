@@ -1,5 +1,5 @@
 class ProxyController < ApplicationController
-  before_filter: verify_request_source
+  before_action :verify_request_source
 
   def index
     ShopifyAPI::Base.site = Shop.find_by_name(params[:shop]).api_url
