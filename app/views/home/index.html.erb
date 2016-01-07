@@ -19,8 +19,3 @@
     <% end %>
   </tbody>
 </table>
-
-<h1>This Week's Earnings</h1>
-<p><%= number_to_currency(@total)%> from <%= @orders.count%> orders</p>
-<h1>Top Seller: <%= link_to(@product.title, url_for_product(@product)) %></h1>
-<p>This product sold <%= @top_seller_count %> units</p>
