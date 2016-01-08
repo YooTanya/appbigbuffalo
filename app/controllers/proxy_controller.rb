@@ -2,7 +2,7 @@ class ProxyController < ApplicationController
   # before_action :verify_request_source
 
   def index
-    params[:shop] = 'eazymo-test.myshopify.com'
+    # params[:shop] = 'eazymo-test.myshopify.com'
     shop = Shop.where(shopify_domain: params[:shop]).first
 
     session = ShopifyAPI::Session.new(shop.shopify_domain, shop.shopify_token)
