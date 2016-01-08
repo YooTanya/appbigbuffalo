@@ -25,7 +25,7 @@ class ProxyController < ApplicationController
     # end
 
     # @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
-
+    @products = []
     render :layout => false
   end
 
