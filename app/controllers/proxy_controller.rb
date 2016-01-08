@@ -1,4 +1,4 @@
-class ProxyController < AuthenticatedController
+class ProxyController < ApplicationController
   # before_action :verify_request_source
 
   def index
