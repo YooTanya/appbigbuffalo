@@ -2,6 +2,12 @@ class ProxyController < ApplicationController
   # before_action :verify_request_source
 
   def index
+    params[:shop] = 'eazymo-test.myshopify.com'
+    shop = Shop.where(shopify_domain: params[:shop]).first
+
+    session = ShopifyAPI::Session.new(shop.shopify_domain, shop.shopify_token)
+    ShopifyAPI::Base.activate_session(session)
+    
     # @orders = ShopifyAPI::Order.find(:all, :params => {:created_at_min => 1.week.ago})
     # @total = 0
 
@@ -24,8 +30,8 @@ class ProxyController < ApplicationController
     #   @top_seller_count = top_seller_stats.last
     # end
 
-    # @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
-    @products = []
+    @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
+    # @products = []
     render :layout => false, :content_type => 'application/liquid'
   end
 
