@@ -1,9 +1,7 @@
-class ProxyController < ApplicationController
+class ProxyController < AuthenticatedController
   # before_action :verify_request_source
 
   def index
-    # ShopifyAPI::Base.site = Shop.find_by_name(params[:shop]).api_url
-
     @orders = ShopifyAPI::Order.find(:all, :params => {:created_at_min => 1.week.ago})
     @total = 0
 
@@ -21,11 +19,14 @@ class ProxyController < ApplicationController
     end
 
     top_seller_stats = @product_sale_counts.max_by{|k,v| v}
-    @product = ShopifyAPI::Product.find(top_seller_stats.first)
+    if top_seller_stats.present?
+      @product = ShopifyAPI::Product.find(top_seller_stats.first)
+      @top_seller_count = top_seller_stats.last
+    end
 
-    @top_seller_count = top_seller_stats.last
+    @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
 
-    render :layout => false, :content_type => 'application/liquid'
+    render :layout => false
   end
 
   # private 

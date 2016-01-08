@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  root :to => 'home#index'
+  mount ShopifyApp::Engine, at: '/'
   controller :sessions do
     get 'login' => :new, :as => :login
     post 'login' => :create, :as => :authenticate
@@ -10,8 +12,6 @@ Rails.application.routes.draw do
   controller :proxy do
     get 'proxy' => :index, :as => :proxy
   end
-
-  root :to => 'home#index'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
