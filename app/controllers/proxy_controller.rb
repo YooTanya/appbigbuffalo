@@ -44,12 +44,12 @@ class ProxyController < AuthenticatedController
 
   #     raise 'Invalid signature' if params[:signature] != calculated_signature
   #   end
+  def render_text
+    render text: 'Hello World' and return
+  end
+
+  def render_text_liquid
+    render text: 'Hello World Liquid', :layout => false, :content_type => 'application/liquid'
+  end
 end
 
-def render_text
-  render text: 'Hello World' and return
-end
-
-def render_text_liquid
-  render text: 'Hello World Liquid', :layout => false, :content_type => 'application/liquid'
-end
