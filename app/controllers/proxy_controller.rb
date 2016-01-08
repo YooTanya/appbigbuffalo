@@ -1,30 +1,30 @@
-class ProxyController < AuthenticatedController
+class ProxyController < ApplicationController
   # before_action :verify_request_source
 
   def index
-    @orders = ShopifyAPI::Order.find(:all, :params => {:created_at_min => 1.week.ago})
-    @total = 0
+    # @orders = ShopifyAPI::Order.find(:all, :params => {:created_at_min => 1.week.ago})
+    # @total = 0
 
-    @product_sale_counts =Hash.new()
+    # @product_sale_counts =Hash.new()
 
-    @orders.each do |order|
-      order.line_items.each do |line_item|
-        if @product_sale_counts[line_item.product_id]
-          @product_sale_counts[line_item.product_id] = @product_sale_counts[line_item.product_id] + line_item.quantity
-        else
-          @product_sale_counts[line_item.product_id] = line_item.quantity
-        end
-      end 
-      @total += order.total_price.to_i
-    end
+    # @orders.each do |order|
+    #   order.line_items.each do |line_item|
+    #     if @product_sale_counts[line_item.product_id]
+    #       @product_sale_counts[line_item.product_id] = @product_sale_counts[line_item.product_id] + line_item.quantity
+    #     else
+    #       @product_sale_counts[line_item.product_id] = line_item.quantity
+    #     end
+    #   end 
+    #   @total += order.total_price.to_i
+    # end
 
-    top_seller_stats = @product_sale_counts.max_by{|k,v| v}
-    if top_seller_stats.present?
-      @product = ShopifyAPI::Product.find(top_seller_stats.first)
-      @top_seller_count = top_seller_stats.last
-    end
+    # top_seller_stats = @product_sale_counts.max_by{|k,v| v}
+    # if top_seller_stats.present?
+    #   @product = ShopifyAPI::Product.find(top_seller_stats.first)
+    #   @top_seller_count = top_seller_stats.last
+    # end
 
-    @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
+    # @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
 
     render :layout => false
   end
