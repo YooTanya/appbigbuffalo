@@ -1,3 +1,4 @@
+console.log('Hello World');
 $(".section-header__title").append( "<p class='test' style='background-color:red;'>Test</p>" );
 
  $.ajax({
