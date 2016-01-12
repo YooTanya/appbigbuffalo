@@ -9,7 +9,7 @@ class ProxyController < ApplicationController
     ShopifyAPI::Base.activate_session(session)
     ShopifyAPI::ScriptTag.create(:event => "onload", :src => "https://appbigbuffalo.herokuapp.com/script.js")
     
-
+    p '#############################'
     # @orders = ShopifyAPI::Order.find(:all, :params => {:created_at_min => 1.week.ago})
     # @total = 0
 
