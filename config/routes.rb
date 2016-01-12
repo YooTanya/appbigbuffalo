@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   end
 
   controller :proxy do
-    get 'proxy' => :index, :as => :proxy
-    get 'proxy/render_text' => :render_text
-    get 'proxy/render_text_liquid' => :render_text_liquid
+    get 'app' => :index, :as => :proxy
+    get 'app/render_text' => :render_text
+    get 'app/render_text_liquid' => :render_text_liquid
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
